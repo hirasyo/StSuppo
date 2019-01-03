@@ -1,0 +1,49 @@
+<h1>テリワンSPモンスター配合表</h1>
+
+<div class="search_wrapper">
+  <div  id="request_ajax_update" class="search_status">
+    <%= form_with method: :get, url: pages_search_path do |form| %>
+    <div class="search_status_keyword_title"><%= form.label("検索モンスター") %></div>
+      <div class="search_status_keyword">
+        <%= form.text_field :keyword , class: 'keyword_text_field'%><br>
+      </div>
+      <div class="search_status_radio">
+        <%= radio_button_tag :search_regexp, :完全一致検索 %>
+        <%= label_tag("完全一致検索", '完全一致検索', class:"search_status_radio_label") %>
+      </div>
+      <div class="search_status_radio">
+        <%= radio_button_tag :search_regexp, :あいまい検索 %>
+        <%= label_tag("あいまい検索", 'あいまい検索', class:"search_status_radio_label") %>
+      </div>
+      <div class="search_status_search_btn">
+        <%= form.submit("検索する", class: "search_btn", data: { disable_with: '検索中...' } ) %>
+      </div>
+    <% end %>
+  </div>
+  <%= link_to '新規登録', 'users/new', class: 'btn btn-block btn-white' %>
+  <div  id="login_ajax_update" class="search_login">
+    <%= form_with method: :post, url: sessions_create_path do |f| %>
+      <div class="search_login_name">
+        <%= f.label :name, class: 'search_login_name_text' %>
+        <%= f.text_field :name, class: 'search_login_name_text' %>
+      </div>
+      <%= f.submit "ログイン", class: 'search_login_btn' %>
+    <% end %>
+  </div>
+  <div id="updated_by_ajax" class="monster_table">
+  <table class="monster_table_default">
+    <tr class="monster_table_header">
+      <th class="monster_table_name">モンスター名</th>
+      <th class="monster_table_pairs">配合元（両親）</th>
+      <th class="monster_table_count">両親となる回数</th>
+    </tr>
+    <% @monster.each do |monster| %>
+    <tr class="monster_table_detail">
+      <td class="monster_table_name"><%= monster.name %></td>
+      <td class="monster_table_pairs"><%= simple_format(monster.pairs) %></td>
+      <td class="monster_table_count"><%= monster.count %></td>
+    </tr>
+    <% end %>
+  </table>
+  </div>
+</div>

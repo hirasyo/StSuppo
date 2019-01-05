@@ -47,14 +47,11 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-#production:
-#  <<: *default
-#  database: StSuppo_production
-#  username: StSuppo
-#  password: <%= ENV['STSUPPO_DATABASE_PASSWORD'] %>
-
 production:
   <<: *default
-adapter: postgresql
-encoding: unicode
-pool: 5
+  database: StSuppo_production
+  username: StSuppo
+  password: <%= ENV['STSUPPO_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  encoding: unicode
+  pool: 5

@@ -1,46 +1,65 @@
-<h1>テリワンSPモンスター配合表</h1>
+<div class="main">
+  <div class="title">テリワンSPモンスター配合表</div>
 
-<div class="search_wrapper">
-  <div  id="request_ajax_update" class="search_status">
-    <%= form_with method: :post, url: sessions_search_path do |form| %>
-    <div class="search_status_keyword_title"><%= form.label("検索モンスター") %></div>
-      <div class="search_status_keyword">
-        <%= form.text_field :keyword , class: 'keyword_text_field'%><br>
-      </div>
-      <div class="search_status_radio">
-        <%= radio_button_tag :search_regexp, :完全一致検索 %>
-        <%= label_tag("完全一致検索", '完全一致検索', class:"search_status_radio_label") %>
-      </div>
-      <div class="search_status_radio">
-        <%= radio_button_tag :search_regexp, :あいまい検索 %>
-        <%= label_tag("あいまい検索", 'あいまい検索', class:"search_status_radio_label") %>
-      </div>
-      <div class="search_status_search_btn">
-        <%= form.submit("検索する", class: "search_btn", data: { disable_with: '検索中...' } ) %>
-      </div>
-    <% end %>
-  </div>
-  <%= form_with method: :delete, url: sessions_destroy_path do |f| %>
-    <%= f.submit("ログアウト", class: "search_btn") %>
-  <% end %>
-
-  <div id="updated_by_ajax" class="monster_table">
-    <% if !@monster.empty? %>
-    <table class="monster_table_default">
-      <tr class="monster_table_header">
-        <th class="monster_table_name">モンスター名</th>
-        <th class="monster_table_pairs">配合元（両親）</th>
-        <th class="monster_table_count">両親となる回数</th>
-      </tr>
-      <% @monster.each do |monster| %>
-      <tr class="monster_table_detail">
-        <td class="monster_table_name"><%= monster.name %></td>
-        <td class="monster_table_pairs"><%= simple_format(monster.pairs) %></td>
-        <td class="monster_table_count"><%= monster.count %></td>
-      </tr>
+  <div class="search_wrapper">
+    <div  id="request_ajax_update" class="search_status">
+      <%= form_with method: :post, url: sessions_search_path do |form| %>
+      <div class="search_status_keyword_title"><%= form.label("検索モンスター") %></div>
+        <div class="search_status_keyword">
+          <%= form.text_field :keyword , class: 'keyword_text_field'%><br>
+        </div>
+        <div class="search_status_radio">
+          <%= radio_button_tag :search_regexp, :完全一致検索 %>
+          <%= label_tag("完全一致検索", '完全一致検索', class:"search_status_radio_label") %>
+        </div>
+        <div class="search_status_radio">
+          <%= radio_button_tag :search_regexp, :あいまい検索 %>
+          <%= label_tag("あいまい検索", 'あいまい検索', class:"search_status_radio_label") %>
+        </div>
+        <div class="search_status_search_btn">
+          <%= form.submit("検索する", class: "search_btn", data: { disable_with: '検索中...' } ) %>
+        </div>
       <% end %>
-    </table>
-    <% else %>
-    <span>検索履歴がありません</span>
-    <% end %>
+    </div>
+    <div class="user_login">
+      <%= @current_user_name %>さんの<br>検索履歴を表示
+    </div>
+    <div class="logout_btn">
+      <%= form_with method: :delete, url: sessions_destroy_path do |f| %>
+        <%= f.submit("ログアウト", class: "search_btn") %>
+      <% end %>
+    </div>
   </div>
+
+  <div class="result_wrapper">
+    <div id="updated_by_ajax" class="monster_table">
+      <%= form_with method: :post, url: sessions_delete_url do |form| %>
+        <% if !@monster.empty? %>
+        <div class="delete_btn">
+          <%= form.submit("チェック項目を削除", class: "monster_delete_btn") %>
+        </div>
+        <table class="monster_table_default">
+          <tr class="monster_table_header">
+            <th class="monster_table_header_name">モンスター名</th>
+            <th class="monster_table_header_pairs">配合元（両親）</th>
+            <th class="monster_table_header_count">両親と　なる回数</th>
+            <th class="monster_table_header_delete">削除</th>
+          </tr>
+          <% count = 0 %>
+          <% @monster.each do |monster| %>
+          <tr class="monster_table_detail">
+            <td class="monster_table_name"><%= monster.name %></td>
+            <td class="monster_table_pairs"><%= simple_format(monster.pairs) %></td>
+            <td class="monster_table_count"><%= monster.count %></td>
+            <% count += 1 %>
+            <td><%= form.check_box :delete_histories, { multiple: true, include_hidden: false}, count %></td>
+          </tr>
+          <% end %>
+        </table>
+        <% else %>
+        <span>検索履歴がありません</span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

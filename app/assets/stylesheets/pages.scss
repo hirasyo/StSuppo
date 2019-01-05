@@ -1,3 +1,38 @@
-// Place all the styles related to the pages controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.result_wrapper{
+
+  .monster_table, .monster_table_default{
+
+    .monster_table_header{
+      border: double 0.25px black;
+      background-color: rgb(216, 245, 206);
+
+      .monster_table_header_pairs{
+        border-left: dotted 0.1px black;
+        border-right: dotted 0.1px black;
+      }
+
+    }
+
+    .monster_table_name{
+      width: 126px;
+      padding: 0px 5px;
+    }
+    .monster_table_pairs{
+      width: 350px;
+      padding: 10px 5px 0px 5px;
+      border-left: dotted 0.1px black;
+      border-right: dotted 0.1px black;
+
+    }
+    .monster_table_count{
+      width: 86px;
+      padding: 0px 5px;
+    }
+    .monster_table_detail{
+      border: double 0.25px black;
+
+    }
+
+  }
+
+}

@@ -1,14 +1,25 @@
-<table class="monster_table_search">
-  <tr class="monster_table_header">
-    <th class="monster_table_name">モンスター名</th>
-    <th class="monster_table_pairs">配合元（両親）</th>
-    <th class="monster_table_count">両親となる回数</th>
-  </tr>
-  <% @monster.each do |monster| %>
-  <tr>
-    <td class="monster_table_name"><%= monster.name %></td>
-    <td class="monster_table_pairs"><%= simple_format(monster.pairs) %></td>
-    <td class="monster_table_count"><%= monster.count %></td>
-  </tr>
+<%= form_with method: :post, url: sessions_delete_url do |form| %>
+  <% if !@monster.empty? %>
+  <%= form.submit("チェック項目を削除", class: "monster_delete_btn") %>
+  <table class="monster_table_default">
+    <tr class="monster_table_header">
+      <th class="monster_table_header_name">モンスター名</th>
+      <th class="monster_table_header_pairs">配合元（両親）</th>
+      <th class="monster_table_header_count">両親となる回数</th>
+      <th class="monster_table_header_delete">削除</th>
+    </tr>
+    <% count = 0 %>
+    <% @monster.each do |monster| %>
+    <tr class="monster_table_detail">
+      <td class="monster_table_name"><%= monster.name %></td>
+      <td class="monster_table_pairs"><%= simple_format(monster.pairs) %></td>
+      <td class="monster_table_count"><%= monster.count %></td>
+      <% count += 1 %>
+      <td><%= form.check_box :delete_histories, { multiple: true, include_hidden: false}, count %></td>
+    </tr>
+    <% end %>
+  </table>
+  <% else %>
+  <span>検索履歴がありません</span>
   <% end %>
-</table>
+<% end %>

@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
     @monster = []
     @history = []
     current_user
-    out_history
+    read_history
   end
 
   def create
@@ -44,10 +44,20 @@ class SessionsController < ApplicationController
     end
 
     @history = []
-    out_history
+    read_history
 
     render partial: 'detail', locals: { :monster => @monster} and return
 
+  end
+
+  def delete
+    if !params[:delete_histories].nil?
+      current_user
+      @history = History.where(user_name: "#{@current_user_name}")
+      delete_history
+    end
+
+    redirect_to '/sessions/new'
   end
 
   private
@@ -68,13 +78,19 @@ class SessionsController < ApplicationController
       end
     end
 
-    def out_history
+    def read_history
       @history = History.where(user_name: "#{@current_user_name}")
 
       if !@history.nil?
         @history.each do |history|
           @monster.unshift(Monster.find_by(name: history[:monster_name]))
         end
+      end
+    end
+
+    def delete_history
+      params[:delete_histories].each do |delete_num|
+        History.find(@history[@history.length - delete_num.to_i][:id]).destroy
       end
     end
 

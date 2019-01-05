@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get 'sessions/new'
   post 'sessions/create'
+  post 'sessions/delete'
   post 'sessions/search'
   delete 'sessions/destroy'
 end

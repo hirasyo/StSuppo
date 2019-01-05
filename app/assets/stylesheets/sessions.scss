@@ -1,3 +1,66 @@
-// Place all the styles related to the Sessions controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.search_wrapper{
+
+  .search_status{
+    width: 300px;
+  }
+
+  .logout_btn{
+    padding: 0px 10px;
+  }
+
+}
+
+.result_wrapper{
+
+  .delete_btn{
+    padding: 5px;
+  }
+
+  .monster_table, .monster_table_default{
+
+    .monster_table_header{
+      border: double 0.25px black;
+      background-color: rgb(216, 245, 206);
+
+      .monster_table_header_pairs{
+        border-left: dotted 0.1px black;
+        border-right: dotted 0.1px black;
+      }
+
+      .monster_table_header_delete{
+        text-align: center;
+        border-left: dotted 0.1px black;
+        width: 20px;
+      }
+
+    }
+
+    .monster_table_name{
+      width: 126px;
+      padding: 0px 5px;
+    }
+    .monster_table_pairs{
+      width: 318px;
+      padding: 10px 0px 0px 0px;
+      border-left: dotted 0.1px black;
+      border-right: dotted 0.1px black;
+
+    }
+    .monster_table_count{
+      width: 66px;
+      padding: 0px 5px;
+      border-right: dotted 0.1px black;
+    }
+    .monster_table_delete{
+      width: 30px;
+      padding: 0px 5px;
+
+    }
+    .monster_table_detail{
+      border: double 0.25px black;
+
+    }
+
+  }
+
+}

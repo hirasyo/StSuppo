@@ -1,3 +1,7 @@
+.main{
+  margin: 30px;
+  background-image: url(image-path("slime.jpeg"));
+}
 .hidden{
   display: none;
 }
@@ -9,18 +13,55 @@
   z-index: 10000;
 }
 
-.search_status{
-  float: left;
+.title{
+  width: 580px;
+  margin: auto;
+  font-size: 36px;
+  text-align: center;
+  opacity: 0.95;
+  background-color: rgb(250, 249, 246);
 }
 
-.search_user{
-  float: left;
+.search_wrapper{
+  width: 580px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  background-color: rgb(250, 249, 246);
+  opacity: 0.95;
+
+  .search_status, .search_login{
+    width: 100%;
+    padding: 5px 10px;
+
+  }
+
+  .user_regist{
+    padding: 10px 0px;
+  }
+
 }
 
-.search_login{
-  float: left;
-}
+.result_wrapper{
+  width: 580px;
+  margin: auto;
+  opacity: 0.95;
 
-.monster_table{
-  float:left;
+  .monster_table_header_name, .monster_table_header_pairs, .monster_table_header_count{
+    text-align: center;
+    padding: 2px 5px;
+  }
+
+  .monster_table, .monster_table_default{
+    text-align: center;
+    background-color: rgb(217, 224, 222);
+    padding:0px 3px;
+
+    tr:nth-child(even){
+      background-color: rgb(240, 237, 237);
+    }
+
+  }
+
 }

@@ -1,10 +1,11 @@
-
-<div class="user">
-  <%= form_with(model: @user) do |form| %>
-    <div class="user_name">
-      <%= form.label :name, class: 'user_name_text' %>
-      <%= form.text_field :name, class: 'user_name_field' %>
-    </div>
-    <%= form.submit "新規登録", class: 'user_btn' %>
-  <% end %>
+<div class="main">
+  <div class="user">
+    <%= form_with(model: @user) do |form| %>
+      <div class="user_name">
+        <%= form.label :name, class: 'user_name_text' %>
+        <%= form.text_field :name, class: 'user_name_field' %>
+      </div>
+      <%= form.submit "新規登録", class: 'user_btn' %>
+    <% end %>
+  </div>
 </div>

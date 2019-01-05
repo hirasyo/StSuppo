@@ -10,9 +10,8 @@ class PagesController < ApplicationController
       # 解析オブジェクトから必要な情報を抽出
       #get_info_terry(@result_terry)
 
-      # register #初回でモンスター情報をDBに登録するためのメソッド
+      register #初回でモンスター情報をDBに登録するためのメソッド
 
-      p "通っちゃダメ"
     end
 
     @monster = Monster.all
@@ -93,7 +92,7 @@ class PagesController < ApplicationController
         count = terry_text.scan("（" + tmpstr + "＋").length + terry_text.scan("＋" + tmpstr + "）" ).length # count
         Regexp.new(/.*:(.*)}$/) =~ info
         pairs = $~.captures[0].gsub(/or/, "\n").gsub(/（|）/, "") # pairs
-         #monster = Monster.create(name: name, pairs: pairs, count: count)
+        monster = Monster.create(name: name, pairs: pairs, count: count)
       end
     end
 end

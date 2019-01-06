@@ -31,11 +31,23 @@ class SessionsController < ApplicationController
 
     current_user
 
-    if params[:search_regexp] == "完全一致検索"
-      @search.push(Monster.find_by(name: params[:keyword]))
-    else
+    if params[:search_status]
       if !params[:keyword].empty?
-        Monster.where('name LIKE ?', "%#{params[:keyword]}%").each {|search| @search.push(search)}
+        if params[:search_regexp] == "完全一致検索"
+          Monster.where('pairs LIKE ?', "%＋#{params[:keyword]}").each {|search| @search.push(search)}
+          Monster.where('pairs LIKE ?', "#{params[:keyword]}＋%").each {|search| @search.push(search)}
+        else
+          Monster.where('pairs LIKE ?', "%#{params[:keyword]}%").each {|search| @search.push(search)}
+        end
+      end
+
+    else
+      if params[:search_regexp] == "完全一致検索"
+        @search.push(Monster.find_by(name: params[:keyword]))
+      else
+        if !params[:keyword].empty?
+          Monster.where('name LIKE ?', "%#{params[:keyword]}%").each {|search| @search.push(search)}
+        end
       end
     end
 

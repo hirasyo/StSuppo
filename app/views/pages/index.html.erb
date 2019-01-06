@@ -9,12 +9,16 @@
           <%= form.text_field :keyword , class: 'keyword_text_field'%><br>
         </div>
         <div class="search_status_radio">
-          <%= radio_button_tag :search_regexp, :完全一致検索 %>
+          <%= radio_button_tag :search_regexp, :完全一致検索 , {:checked => true}%>
           <%= label_tag("完全一致検索", '完全一致検索', class:"search_status_radio_label") %>
         </div>
         <div class="search_status_radio">
           <%= radio_button_tag :search_regexp, :あいまい検索 %>
           <%= label_tag("あいまい検索", 'あいまい検索', class:"search_status_radio_label") %>
+        </div>
+        <div class="search_status_check">
+          <%= form.check_box :search_status ,{},checked_value = "true",unchecked_value = "false" %>
+          <%= label_tag("配合元を検索", '配合元を検索', class:"search_status_check_label") %>
         </div>
         <div class="search_status_search_btn">
           <%= form.submit("検索する", class: "search_btn", data: { disable_with: '検索中...' } ) %>

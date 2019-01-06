@@ -20,7 +20,7 @@ class PagesController < ApplicationController
 
   def search
     @monster = []
-    if params[:search_status]
+    if params[:search_status] == "true"
       if !params[:keyword].empty?
         if params[:search_regexp] == "完全一致検索"
           Monster.where('pairs LIKE ?', "%＋#{params[:keyword]}").each {|monster| @monster.push(monster)}
